@@ -111,11 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Cnpj c1 = new Cnpj(null, '3871293812');
-          Cnpj c2 = new Cnpj(null, '34121295342');
-          e.Empreendimento emp = new e.Empreendimento(null, "rqza", [c1, c2]);
-          int i = await e.insert(emp);
-          print(i);
+          e.Empreendimento emps = await e.find(2);
+          print(emps);
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

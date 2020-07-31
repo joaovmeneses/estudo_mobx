@@ -12,7 +12,7 @@ class Empreendimento {
 
   Empreendimento.fromJson(Map<String, dynamic> map)
       : id = map['id'],
-        razao_social = map['cnpj'];
+        razao_social = map['razao_social'];
 
   @override
   String toString() {
@@ -46,7 +46,7 @@ Future<Empreendimento> find(int id) async {
   final String sql = "select * from empreendimento where id = ?";
   List<Map> list_map = await _db.rawQuery(sql, [id]);
   Empreendimento emp = Empreendimento.fromJson(list_map[0]);
-  //emp.cnpj =
+  emp.cnpj = await c.getAll(id);
   return emp;
 }
 
