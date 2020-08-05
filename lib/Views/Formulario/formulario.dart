@@ -1,3 +1,4 @@
+import 'package:estudo_mobx/Model/Empreendimento.dart';
 import 'package:estudo_mobx/Views/Formulario/formControl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -39,20 +40,18 @@ class _FormularioState extends State<Formulario> {
                       );
                     },
                   )),
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: TextField(
-                  decoration: InputDecoration(labelText: "CNPJ"),
-                ),
-              ),
               Observer(
                 builder: (_){
                   return  ListView.builder(
                     shrinkWrap: true,
                     itemCount: controllerForm.cnpj.length,
                     itemBuilder: (context, index) {
+                      var item = controllerForm.cnpj[index];
                       return TextFormField(
-                        decoration: InputDecoration(labelText: "CNPJ"),
+                        decoration: InputDecoration(
+                            labelText: "CNPJ"
+                        ),
+                        onChanged: item.changeCnpj,
                       );
                     },
                   );
@@ -61,8 +60,9 @@ class _FormularioState extends State<Formulario> {
               RaisedButton(
                 child: Text("Adicionar"),
                 onPressed: () {
-//                  Navigator.pop(context);
-                  controllerForm.incrementCnpj();
+                  insert(Empreendimento(null, controllerForm.razao_social, controllerForm.toCnpj()));
+                  print(controllerForm.toCnpj());
+                  Navigator.pop(context);
 
                 },
               )

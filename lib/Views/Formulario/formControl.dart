@@ -1,9 +1,10 @@
+import 'package:estudo_mobx/Views/Formulario/cnpjcontroller.dart';
 import 'package:mobx/mobx.dart';
 import '../../Model/Cnpj.dart';
 
 part 'formControl.g.dart';
 
-class ControllerForm = _FormBase with _$Form;
+class ControllerForm = _FormBase with _$ControllerForm;
 
 abstract class _FormBase with Store{
   @observable
@@ -18,11 +19,19 @@ abstract class _FormBase with Store{
   }
 
   @observable
-  List<Cnpj> cnpj = [Cnpj(0, "")];
+  ObservableList<CNPJ> cnpj = ObservableList.of([CNPJ()]);
 
   @action
   incrementCnpj(){
-    cnpj.insert(cnpj.length, Cnpj(0, ""));
+    cnpj.insert(cnpj.length, CNPJ());
   }
 
+  @action
+  List<Cnpj> toCnpj(){
+    List<Cnpj> aux = List();
+    for(int i = 0; i < cnpj.length; i++){
+      aux.add(Cnpj(null, cnpj[i].cnpj));
+    }
+    return aux;
+  }
 }
